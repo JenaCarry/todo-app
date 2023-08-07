@@ -2,26 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer base {
+  body {
+    @apply min-h-screen text-lg bg-body-bg bg-header-bg bg-no-repeat bg-top bg-[length:100%12.5rem] px-[1.625rem];
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+:root {
+  --header-bg: url("/bg-mobile-dark.jpg");
+  --body-bg: hsl(235, 21%, 11%);
+  --main-bg: hsl(235, 24%, 19%);
+  --text: hsl(234, 39%, 85%);
+}
+
+.light {
+  --header-bg: url("/bg-mobile-light.jpg");
+  --body-bg: hsl(236, 33%, 92%);
+  --main-bg: hsl(0, 0%, 98%);
+  --text: hsl(237, 14%, 26%);
 }
