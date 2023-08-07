@@ -1,28 +1,16 @@
 "use client";
-import { useEffect, useState } from "react";
 import { FaMoon } from "react-icons/fa";
 import { IoSunny } from "react-icons/io5";
 
-export function Header() {
-  const savedTheme = localStorage.getItem("theme");
-  const [isLightTheme, setIsLightTheme] = useState(savedTheme === "light");
+interface HeaderProps {
+  toggleTheme: () => void;
+  isLightTheme: boolean;
+}
 
-  useEffect(() => {
-    const root = document.documentElement;
-
-    if (isLightTheme) {
-      root.classList.add("light");
-      localStorage.setItem("theme", "light");
-    } else {
-      root.classList.remove("light");
-      localStorage.setItem("theme", "dark");
-    }
-  }, [isLightTheme]);
-
-  function toggleTheme() {
-    setIsLightTheme((prevIsLightTheme) => !prevIsLightTheme);
-  }
-
+export function Header({
+  toggleTheme,
+  isLightTheme,
+}: HeaderProps): JSX.Element {
   return (
     <header className="text-white text-2xl flex items-center justify-between py-11">
       <h1 className="font-bold uppercase tracking-[0.5rem]">Todo</h1>
