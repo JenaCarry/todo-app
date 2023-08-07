@@ -4,22 +4,26 @@ import { Main } from "@/components/Main";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const savedTheme = localStorage.getItem("theme");
-  const [isLightTheme, setIsLightTheme] = useState(savedTheme === "light");
+  const [isLightTheme, setIsLightTheme] = useState(
+    localStorage.getItem("theme") === "light"
+  );
 
   useEffect(() => {
-    const root = document.documentElement;
-
     if (isLightTheme) {
-      root.classList.add("light");
       localStorage.setItem("theme", "light");
     } else {
-      root.classList.remove("light");
       localStorage.setItem("theme", "dark");
     }
   }, [isLightTheme]);
 
   function toggleTheme() {
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "light") {
+      root.classList.add("light");
+    } else {
+      root.classList.remove("light");
+    }
     setIsLightTheme((prevIsLightTheme) => !prevIsLightTheme);
   }
   return (
