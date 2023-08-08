@@ -4,15 +4,18 @@ import { FaMoon } from "react-icons/fa";
 import { IoSunny } from "react-icons/io5";
 
 export function Header() {
-  const [isLightTheme, setIsLightTheme] = useState(false);
+  const savedTheme = localStorage.getItem("theme");
+  const [isLightTheme, setIsLightTheme] = useState(savedTheme === "light");
 
   useEffect(() => {
     const root = document.documentElement;
 
     if (isLightTheme) {
       root.classList.add("light");
+      localStorage.setItem("theme", "light");
     } else {
       root.classList.remove("light");
+      localStorage.setItem("theme", "dark");
     }
   }, [isLightTheme]);
 
