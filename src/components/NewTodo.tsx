@@ -17,8 +17,8 @@ export function NewTodo({ addTodo }: NewTodoProps): JSX.Element {
   }
 
   return (
-    <section className="relative flex items-center">
-      <form onSubmit={handleSubmit}>
+    <section className="flex items-center">
+      <form onSubmit={handleSubmit} className="w-full">
         <input
           className="w-full outline-none rounded-md py-2.5 pl-14"
           name="todo"

@@ -14,18 +14,14 @@ export function Main() {
   const [todos, setTodos] = useState<TodosProps[]>([]);
   const [visible, setVisible] = useState(true);
 
-  function loadSavedTodo() {
+  useEffect(() => {
     const saved = localStorage.getItem("todos");
     if (saved) {
       setTodos(JSON.parse(saved));
     }
-  }
-
-  useEffect(() => {
     const timer = setTimeout(() => {
       setVisible(false);
-      loadSavedTodo();
-    }, 1000);
+    }, 300);
     return () => clearTimeout(timer);
   }, []);
 
@@ -38,7 +34,7 @@ export function Main() {
     const newTodos = [
       ...todos,
       {
-        id: String(Math.floor(Math.random() * 10000)),
+        id: crypto.randomUUID(),
         text,
         isCompleted: false,
       },
