@@ -5,9 +5,9 @@ import { IoSunny } from "react-icons/io5";
 
 export function Header() {
   const [theme, setTheme] = useState("");
-  const element = document.documentElement;
 
   useEffect(() => {
+    const element = document.documentElement;
     if (theme === "light") {
       element.classList.add("light");
       localStorage.setItem("theme", "light");
