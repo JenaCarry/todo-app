@@ -13,6 +13,7 @@ module.exports = {
         "body-bg": "var(--body-bg)",
         "main-bg": "var(--main-bg)",
         text: "var(--text)",
+        icon: "var(--icon)",
       },
       backgroundImage: {
         gradient:

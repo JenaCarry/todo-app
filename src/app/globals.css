@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply min-h-screen text-lg bg-body-bg bg-header-bg bg-no-repeat bg-top bg-[length:100%12.5rem] px-[1.625rem];
+    @apply min-h-screen max-[425px]:text-base text-lg bg-body-bg bg-header-bg bg-no-repeat bg-top bg-[length:100%12.5rem] px-[1.625rem];
   }
 }
 
@@ -13,6 +13,7 @@
   --body-bg: hsl(235, 21%, 11%);
   --main-bg: hsl(235, 24%, 19%);
   --text: hsl(234, 39%, 85%);
+  --icon: hsl(238, 13%, 37%);
 }
 
 .light {
@@ -20,4 +21,5 @@
   --body-bg: hsl(236, 33%, 92%);
   --main-bg: hsl(0, 0%, 98%);
   --text: hsl(237, 14%, 26%);
+  --icon: hsl(240, 5%, 64%);
 }
