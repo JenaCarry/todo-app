@@ -4,8 +4,7 @@ import { FaMoon } from "react-icons/fa";
 import { IoSunny } from "react-icons/io5";
 
 export function Header() {
-  const save = localStorage.getItem("theme");
-  const [theme, setTheme] = useState(save);
+  const [theme, setTheme] = useState("");
   const element = document.documentElement;
 
   useEffect(() => {
