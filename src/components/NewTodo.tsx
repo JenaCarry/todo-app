@@ -17,17 +17,22 @@ export function NewTodo({ addTodo }: NewTodoProps): JSX.Element {
   }
 
   return (
-    <section className="flex items-center">
-      <form onSubmit={handleSubmit} className="w-full">
+    <section>
+      <form
+        onSubmit={handleSubmit}
+        className="w-full grid grid-cols-[4rem_1fr] bg-white overflow-hidden rounded-md"
+      >
+        <button className="flex items-center justify-center">
+          <div className="w-6 h-6 border-2 rounded-full"></div>
+        </button>
         <input
-          className="w-full outline-none rounded-md py-2.5 pl-14"
+          className="outline-none py-2.5 pr-3"
           name="todo"
           id="todo"
           value={value}
           placeholder="Create a new todo..."
           onChange={(e) => setValue(e.target.value)}
         />
-        <div></div>
       </form>
     </section>
   );

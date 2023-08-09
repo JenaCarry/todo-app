@@ -13,6 +13,7 @@ interface TodosProps {
 export function Main() {
   const [todos, setTodos] = useState<TodosProps[]>([]);
   const [visible, setVisible] = useState(true);
+  const completedTodos = todos.filter((todo) => !todo.isCompleted).length;
 
   useEffect(() => {
     const saved = localStorage.getItem("todos");
@@ -58,6 +59,14 @@ export function Main() {
     setTodosAndSave(newTodos);
   };
 
+  const clearCompleted = () => {
+    const newTodos = [...todos];
+    const filteredTodos = newTodos.filter((todo) =>
+      todo.isCompleted ? null : todo
+    );
+    setTodosAndSave(filteredTodos);
+  };
+
   return (
     <main className="flex flex-col gap-4 mx-auto">
       <NewTodo addTodo={addTodo} />
@@ -74,6 +83,10 @@ export function Main() {
             />
           ))
         )}
+        <div className="h-[52px] flex items-center justify-between p-6">
+          <p>{completedTodos} items left</p>
+          <p onClick={clearCompleted}>Clear Completed</p>
+        </div>
       </ul>
     </main>
   );
