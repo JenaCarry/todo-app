@@ -23,3 +23,8 @@
   --text: hsl(237, 14%, 26%);
   --icon: hsl(240, 5%, 64%);
 }
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px var(--main-bg) inset;
+  -webkit-text-fill-color: var(--text);
+}

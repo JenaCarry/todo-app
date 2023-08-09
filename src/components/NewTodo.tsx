@@ -26,7 +26,7 @@ export function NewTodo({ addTodo }: NewTodoProps): JSX.Element {
           <div className="w-6 h-6 border-2 rounded-full"></div>
         </button>
         <input
-          className="outline-none py-2.5 pr-3 bg-main-bg"
+          className="outline-none py-2.5 pr-3 bg-main-bg text-text"
           name="todo"
           id="todo"
           value={value}

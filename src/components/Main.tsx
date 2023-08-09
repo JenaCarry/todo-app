@@ -14,8 +14,10 @@ interface TodosProps {
 export function Main() {
   const [todos, setTodos] = useState<TodosProps[]>([]);
   const [visible, setVisible] = useState(true);
-  const completedTodosLength = todos.filter((todo) => !todo.isCompleted).length;
   const [filter, setFilter] = useState("All");
+  const completedTodosLength = todos.filter((todo) =>
+    filter === "All" || filter === "Active" ? !todo.isCompleted : ""
+  ).length;
 
   useEffect(() => {
     const saved = localStorage.getItem("todos");
