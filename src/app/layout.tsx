@@ -1,8 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Josefin_Sans } from "next/font/google";
+import { Roboto } from "next/font/google";
 
-const roboto = Josefin_Sans({
+const roboto = Roboto({
   weight: ["400", "700"],
   subsets: ["latin"],
 });
