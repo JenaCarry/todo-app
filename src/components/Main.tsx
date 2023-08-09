@@ -1,4 +1,5 @@
 "use client";
+import { Filter } from "./Filter";
 import { Loading } from "./Loading";
 import { NewTodo } from "./NewTodo";
 import { Todos } from "./Todos";
@@ -13,7 +14,8 @@ interface TodosProps {
 export function Main() {
   const [todos, setTodos] = useState<TodosProps[]>([]);
   const [visible, setVisible] = useState(true);
-  const completedTodos = todos.filter((todo) => !todo.isCompleted).length;
+  const completedTodosLength = todos.filter((todo) => !todo.isCompleted).length;
+  const [filter, setFilter] = useState("All");
 
   useEffect(() => {
     const saved = localStorage.getItem("todos");
@@ -74,33 +76,31 @@ export function Main() {
         {visible ? (
           <Loading />
         ) : (
-          todos.map((todo) => (
-            <Todos
-              key={todo.id}
-              todo={todo}
-              removeTodo={removeTodo}
-              completeTodo={completeTodo}
-            />
-          ))
+          todos
+            .filter((todo) =>
+              filter === "All"
+                ? true
+                : filter === "Completed"
+                ? todo.isCompleted
+                : !todo.isCompleted
+            )
+            .map((todo) => (
+              <Todos
+                key={todo.id}
+                todo={todo}
+                removeTodo={removeTodo}
+                completeTodo={completeTodo}
+              />
+            ))
         )}
         <div className="h-[52px] flex items-center justify-between">
-          <p className="pl-6">{completedTodos} items left</p>
+          <p className="pl-6">{completedTodosLength} items left</p>
           <button onClick={clearCompleted} className="h-full pr-6">
             Clear Completed
           </button>
         </div>
       </ul>
-      <ul className="bg-main-bg text-text py-3 flex items-center justify-center gap-5 rounded-md">
-        <li>
-          <button>All</button>
-        </li>
-        <li>
-          <button>Active</button>
-        </li>
-        <li>
-          <button>Completed</button>
-        </li>
-      </ul>
+      <Filter filter={filter} setFilter={setFilter} />
     </main>
   );
 }
