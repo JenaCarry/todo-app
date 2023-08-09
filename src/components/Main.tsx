@@ -83,10 +83,23 @@ export function Main() {
             />
           ))
         )}
-        <div className="h-[52px] flex items-center justify-between p-6">
-          <p>{completedTodos} items left</p>
-          <p onClick={clearCompleted}>Clear Completed</p>
+        <div className="h-[52px] flex items-center justify-between">
+          <p className="pl-6">{completedTodos} items left</p>
+          <button onClick={clearCompleted} className="h-full pr-6">
+            Clear Completed
+          </button>
         </div>
+      </ul>
+      <ul className="bg-main-bg text-text py-3 flex items-center justify-center gap-5 rounded-md">
+        <li>
+          <button>All</button>
+        </li>
+        <li>
+          <button>Active</button>
+        </li>
+        <li>
+          <button>Completed</button>
+        </li>
       </ul>
     </main>
   );
