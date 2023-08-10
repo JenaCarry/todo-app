@@ -3,7 +3,7 @@ import { Filter } from "./Filter";
 import { Loading } from "./Loading";
 import { NewTodo } from "./NewTodo";
 import { Todos } from "./Todos";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface TodosProps {
   id: string;
@@ -71,10 +71,35 @@ export function Main() {
     setTodosAndSave(filteredTodos);
   };
 
+  const dragItem = useRef<any>(null);
+  const dragOverItem = useRef<any>(null);
+
+  const onDragStart = (e: React.DragEvent, index: number) => {
+    e.currentTarget.classList.add("dragging");
+    dragItem.current = index;
+  };
+
+  const onDragEnter = (e: React.DragEvent, index: number) => {
+    dragOverItem.current = index;
+  };
+
+  const handleSort = (e: React.DragEvent) => {
+    e.currentTarget.classList.remove("dragging");
+    let newTodos = [...todos];
+
+    const draggedItemContent = newTodos.splice(dragItem.current, 1)[0];
+    newTodos.splice(dragOverItem.current, 0, draggedItemContent);
+
+    dragItem.current = null;
+    dragOverItem.current = null;
+
+    setTodosAndSave(newTodos);
+  };
+
   return (
     <main className="flex flex-col gap-4 mx-auto">
       <NewTodo addTodo={addTodo} />
-      <ul className="bg-main-bg text-text rounded-md">
+      <div className="bg-main-bg text-text rounded-md">
         {visible ? (
           <Loading />
         ) : (
@@ -86,13 +111,23 @@ export function Main() {
                 ? todo.isCompleted
                 : !todo.isCompleted
             )
-            .map((todo) => (
-              <Todos
+            .map((todo, index) => (
+              <div
                 key={todo.id}
-                todo={todo}
-                removeTodo={removeTodo}
-                completeTodo={completeTodo}
-              />
+                draggable
+                onDragStart={(e) => onDragStart(e, index)}
+                onDragEnter={(e) => onDragEnter(e, index)}
+                onDragEnd={handleSort}
+                onDragOver={(e) => e.preventDefault()}
+                className="border-b border-details last:border-none"
+              >
+                <Todos
+                  todo={todo}
+                  removeTodo={removeTodo}
+                  completeTodo={completeTodo}
+                  index={index}
+                />
+              </div>
             ))
         )}
         <div className="h-[52px] flex items-center justify-between">
@@ -101,7 +136,7 @@ export function Main() {
             Clear Completed
           </button>
         </div>
-      </ul>
+      </div>
       <Filter filter={filter} setFilter={setFilter} />
     </main>
   );

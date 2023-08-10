@@ -10,6 +10,7 @@ interface Todo {
 
 interface TodosProps {
   todo: Todo;
+  index: number;
   removeTodo: (id: string) => void;
   completeTodo: (id: string) => void;
 }
@@ -20,8 +21,8 @@ export function Todos({
   completeTodo,
 }: TodosProps): JSX.Element {
   return (
-    <li
-      className={`h-[52px] border-b border-details last:border-none relative grid grid-rows-1 grid-cols-[4rem_1fr_4rem] ${
+    <div
+      className={`h-[52px] relative grid grid-rows-1 grid-cols-[4rem_1fr_4rem] ${
         todo.isCompleted ? "line-through" : ""
       }`}
     >
@@ -51,6 +52,6 @@ export function Todos({
       >
         <IoClose className="text-3xl text-details" />
       </button>
-    </li>
+    </div>
   );
 }
