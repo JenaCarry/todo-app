@@ -21,7 +21,7 @@
   --body-bg: hsl(236, 33%, 92%);
   --main-bg: hsl(0, 0%, 98%);
   --text: hsl(237, 14%, 26%);
-  --icon: hsl(240, 5%, 64%);
+  --details: hsl(233, 14%, 35%);
 }
 
 input:-webkit-autofill {
@@ -29,8 +29,24 @@ input:-webkit-autofill {
   -webkit-text-fill-color: var(--text);
 }
 
+::-webkit-scrollbar {
+  @apply w-2.5;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-main-bg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-text border border-solid border-details rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-details;
+}
+
 @layer utilities {
   .dragging {
-    @apply opacity-50 bg-white/10;
+    @apply opacity-50 bg-white/10 border-2 border-dashed;
   }
 }
