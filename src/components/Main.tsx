@@ -3,7 +3,7 @@ import { Filter } from "./Filter";
 import { Loading } from "./Loading";
 import { NewTodo } from "./NewTodo";
 import { Todos } from "./Todos";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface TodosProps {
   id: string;
@@ -26,7 +26,7 @@ export function Main() {
     }
     const timer = setTimeout(() => {
       setVisible(false);
-    }, 300);
+    }, 100);
     return () => clearTimeout(timer);
   }, []);
 
@@ -71,35 +71,38 @@ export function Main() {
     setTodosAndSave(filteredTodos);
   };
 
-  const dragItem = useRef<any>(null);
-  const dragOverItem = useRef<any>(null);
+  function getNewPosition(
+    column: HTMLElement,
+    posY: number
+  ): HTMLElement | null {
+    const cards = column.querySelectorAll<HTMLElement>(".item:not(.dragging)");
+    let result: HTMLElement | null = null;
+    cards.forEach((referCard) => {
+      const box = referCard.getBoundingClientRect();
+      const boxCenterY = box.y + box.height / 2;
 
-  const onDragStart = (e: React.DragEvent, index: number) => {
-    e.currentTarget.classList.add("dragging");
-    dragItem.current = index;
-  };
+      if (posY >= boxCenterY) result = referCard;
+    });
+    return result;
+  }
 
-  const onDragEnter = (e: React.DragEvent, index: number) => {
-    dragOverItem.current = index;
-  };
+  function onDragOvered(e: React.DragEvent<HTMLElement>) {
+    const dragging = document.querySelector<HTMLElement>(".dragging");
+    const applyAfter = getNewPosition(e.currentTarget, e.clientY);
 
-  const handleSort = (e: React.DragEvent) => {
-    e.currentTarget.classList.remove("dragging");
-    let newTodos = [...todos];
-
-    const draggedItemContent = newTodos.splice(dragItem.current, 1)[0];
-    newTodos.splice(dragOverItem.current, 0, draggedItemContent);
-
-    dragItem.current = null;
-    dragOverItem.current = null;
-
-    setTodosAndSave(newTodos);
-  };
+    if (applyAfter) {
+      if (dragging) {
+        applyAfter.insertAdjacentElement("afterend", dragging);
+      }
+    } else if (dragging) {
+      e.currentTarget.prepend(dragging);
+    }
+  }
 
   return (
     <main className="flex flex-col gap-4 mx-auto">
       <NewTodo addTodo={addTodo} />
-      <div className="bg-main-bg text-text rounded-md">
+      <ul className="bg-main-bg text-text rounded-md" onDragOver={onDragOvered}>
         {visible ? (
           <Loading />
         ) : (
@@ -111,32 +114,22 @@ export function Main() {
                 ? todo.isCompleted
                 : !todo.isCompleted
             )
-            .map((todo, index) => (
-              <div
+            .map((todo) => (
+              <Todos
                 key={todo.id}
-                draggable
-                onDragStart={(e) => onDragStart(e, index)}
-                onDragEnter={(e) => onDragEnter(e, index)}
-                onDragEnd={handleSort}
-                onDragOver={(e) => e.preventDefault()}
-                className="border-b border-details last:border-none"
-              >
-                <Todos
-                  todo={todo}
-                  removeTodo={removeTodo}
-                  completeTodo={completeTodo}
-                  index={index}
-                />
-              </div>
+                todo={todo}
+                removeTodo={removeTodo}
+                completeTodo={completeTodo}
+              />
             ))
         )}
-        <div className="h-[52px] flex items-center justify-between">
+        <li className="h-[52px] flex items-center justify-between">
           <p className="pl-6">{completedTodosLength} items left</p>
           <button onClick={clearCompleted} className="h-full pr-6">
             Clear Completed
           </button>
-        </div>
-      </div>
+        </li>
+      </ul>
       <Filter filter={filter} setFilter={setFilter} />
     </main>
   );

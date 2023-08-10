@@ -10,7 +10,6 @@ interface Todo {
 
 interface TodosProps {
   todo: Todo;
-  index: number;
   removeTodo: (id: string) => void;
   completeTodo: (id: string) => void;
 }
@@ -20,11 +19,22 @@ export function Todos({
   removeTodo,
   completeTodo,
 }: TodosProps): JSX.Element {
+  function onDragStarted(e: React.DragEvent<HTMLElement>) {
+    e.currentTarget.classList.add("dragging");
+  }
+
+  function onDragEnded(e: React.DragEvent<HTMLElement>) {
+    e.currentTarget.classList.remove("dragging");
+  }
+
   return (
-    <div
-      className={`h-[52px] relative grid grid-rows-1 grid-cols-[4rem_1fr_4rem] ${
+    <li
+      className={`item h-[52px] relative grid grid-rows-1 grid-cols-[4rem_1fr_4rem] border-b border-details last:border-none ${
         todo.isCompleted ? "line-through" : ""
       }`}
+      draggable
+      onDragStart={onDragStarted}
+      onDragEnd={onDragEnded}
     >
       {todo.isCompleted ? (
         <button
@@ -43,7 +53,10 @@ export function Todos({
           <div className="w-6 h-6 border-2 border-details rounded-full"></div>
         </button>
       )}
-      <button onClick={() => completeTodo(todo.id)} className="text-left">
+      <button
+        onClick={() => completeTodo(todo.id)}
+        className={`text-left ${todo.isCompleted ? "opacity-25" : ""}`}
+      >
         {todo.text}
       </button>
       <button
@@ -52,6 +65,6 @@ export function Todos({
       >
         <IoClose className="text-3xl text-details" />
       </button>
-    </div>
+    </li>
   );
 }
