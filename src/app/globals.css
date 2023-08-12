@@ -4,24 +4,28 @@
 
 @layer base {
   body {
-    @apply min-h-screen max-[425px]:text-base text-lg bg-body-bg bg-header-bg bg-no-repeat bg-top bg-[length:100%12.5rem] px-[1.625rem];
+    @apply min-h-screen max-[425px]:text-base text-lg text-text bg-body-bg bg-header-bg bg-no-repeat bg-top bg-[length:100%12.5rem] px-[1.625rem];
   }
 }
 
 :root {
-  --header-bg: url("/bg-mobile-dark.jpg");
-  --body-bg: hsl(235, 21%, 11%);
-  --main-bg: hsl(235, 24%, 19%);
-  --text: hsl(234, 39%, 85%);
-  --details: hsl(233, 14%, 35%);
-}
-
-.light {
   --header-bg: url("/bg-mobile-light.jpg");
   --body-bg: hsl(236, 33%, 92%);
   --main-bg: hsl(0, 0%, 98%);
   --text: hsl(235, 19%, 35%);
-  --details: hsl(236, 9%, 61%);
+  --border-bg: hsl(233, 11%, 84%);
+  --complements: hsl(236, 9%, 61%);
+  --hover-bg: hsl(235, 19%, 35%);
+}
+
+.dark {
+  --header-bg: url("/bg-mobile-dark.jpg");
+  --body-bg: hsl(235, 21%, 11%);
+  --main-bg: hsl(235, 24%, 19%);
+  --text: hsl(234, 39%, 85%);
+  --border-bg: hsl(237, 14%, 26%);
+  --complements: hsl(233, 14%, 35%);
+  --hover-bg: hsl(236, 33%, 92%);
 }
 
 input:-webkit-autofill {
@@ -38,15 +42,27 @@ input:-webkit-autofill {
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-text border border-solid border-details rounded-full;
+  @apply bg-text border border-solid border-border-bg rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-details;
+  @apply bg-border-bg;
 }
 
-@layer utilities {
-  .dragging {
-    @apply opacity-50 bg-white/10 border-2 border-dashed;
-  }
-}
+/* ### Light Theme
+
+- Very Light Gray: hsl(0, 0%, 98%)
+- Very Light Grayish Blue: hsl(236, 33%, 92%)
+- Light Grayish Blue: hsl(233, 11%, 84%)
+- Dark Grayish Blue: hsl(236, 9%, 61%)
+- Very Dark Grayish Blue: hsl(235, 19%, 35%)
+
+### Dark Theme
+
+- Very Dark Blue: hsl(235, 21%, 11%)
+- Very Dark Desaturated Blue: hsl(235, 24%, 19%)
+- Light Grayish Blue: hsl(234, 39%, 85%)
+- Light Grayish Blue (hover): hsl(236, 33%, 92%)
+- Dark Grayish Blue: hsl(234, 11%, 52%)
+- Very Dark Grayish Blue: hsl(233, 14%, 35%)
+- Very Dark Grayish Blue: hsl(237, 14%, 26%) */
