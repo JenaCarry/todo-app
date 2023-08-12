@@ -2,6 +2,14 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { FaCheck } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
+import { DndContext, closestCenter } from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+  useSortable,
+  arrayMove,
+} from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 interface Task {
   id: string;
@@ -17,26 +25,42 @@ interface ListTasksProps {
 export function ListTasks({ todos, setTodosAndSave }: ListTasksProps) {
   const [filter, setFilter] = useState("All");
 
+  function handleDragEnd(event: any) {
+    const { active, over } = event;
+
+    const oldIndex = todos.findIndex((todo) => todo.id === active.id);
+    const newIndex = todos.findIndex((todo) => todo.id === over.id);
+
+    setTodosAndSave(arrayMove(todos, oldIndex, newIndex));
+  }
+
   return (
     <>
-      <ul className="bg-main-bg rounded-md overflow-auto">
-        {todos.length > 0 &&
-          todos
-            .filter((todo) =>
-              filter === "All"
-                ? true
-                : filter === "Completed"
-                ? todo.isCompleted
-                : !todo.isCompleted
-            )
-            .map((todo) => (
-              <Task
-                key={todo.id}
-                todo={todo}
-                todos={todos}
-                setTodosAndSave={setTodosAndSave}
-              />
-            ))}
+      <ul className="bg-main-bg rounded-md overflow-hidden">
+        <DndContext
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext items={todos} strategy={verticalListSortingStrategy}>
+            {todos.length > 0 &&
+              todos
+                .filter((todo) =>
+                  filter === "All"
+                    ? true
+                    : filter === "Completed"
+                    ? todo.isCompleted
+                    : !todo.isCompleted
+                )
+                .map((todo) => (
+                  <Task
+                    key={todo.id}
+                    todo={todo}
+                    todos={todos}
+                    setTodosAndSave={setTodosAndSave}
+                  />
+                ))}
+          </SortableContext>
+        </DndContext>
         <ClearTasks
           text="Clear Completed"
           todos={todos}
@@ -44,6 +68,7 @@ export function ListTasks({ todos, setTodosAndSave }: ListTasksProps) {
           filter={filter}
         />
       </ul>
+
       <ul>
         <OrderList filter={filter} setFilter={setFilter} />
       </ul>
@@ -58,6 +83,16 @@ interface TasksProps {
 }
 
 export function Task({ todo, todos, setTodosAndSave }: TasksProps) {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({
+      id: todo.id,
+    });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
   const handleRemove = (id: string) => {
     const newTodos = [...todos];
     const filteredTodos = newTodos.filter((todo) =>
@@ -68,6 +103,7 @@ export function Task({ todo, todos, setTodosAndSave }: TasksProps) {
   };
 
   const handleComplete = (id: string) => {
+    console.log("click");
     const newTodos = [...todos];
     newTodos.map((todo) =>
       todo.id === id ? (todo.isCompleted = !todo.isCompleted) : todo
@@ -80,6 +116,10 @@ export function Task({ todo, todos, setTodosAndSave }: TasksProps) {
       className={`w-full h-[3.25rem] grid grid-cols-[4rem_1fr_4rem] border-b border-border-bg ${
         todo.isCompleted ? "line-through" : ""
       }`}
+      style={style}
+      ref={setNodeRef}
+      {...attributes}
+      {...listeners}
     >
       {todo.isCompleted ? (
         <button
