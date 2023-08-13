@@ -57,8 +57,8 @@ export function ListTasks({ todos, setTodosAndSave }: ListTasksProps) {
   }
 
   return (
-    <>
-      <ul className="bg-main-bg rounded-md overflow-hidden">
+    <div className="overflow-hidden">
+      <ul className="bg-main-bg rounded-t-md mt-4">
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
@@ -84,18 +84,20 @@ export function ListTasks({ todos, setTodosAndSave }: ListTasksProps) {
                 ))}
           </SortableContext>
         </DndContext>
-        <ClearTasks
-          text="Clear Completed"
-          todos={todos}
-          setTodosAndSave={setTodosAndSave}
-          filter={filter}
-        />
       </ul>
-
-      <ul>
-        <OrderList filter={filter} setFilter={setFilter} />
-      </ul>
-    </>
+      <ClearTasks
+        text="Clear Completed"
+        todos={todos}
+        setTodosAndSave={setTodosAndSave}
+        filter={filter}
+        setFilter={setFilter}
+      />
+      <OrderList
+        className="flex gap-5 justify-center bg-main-bg text-complements font-bold py-3 rounded-md mt-4 min-[640px]:hidden"
+        filter={filter}
+        setFilter={setFilter}
+      />
+    </div>
   );
 }
 
@@ -192,6 +194,7 @@ interface ClearTasksProps {
   todos: Task[];
   setTodosAndSave: (newTodos: Task[]) => void;
   filter: string;
+  setFilter: (filter: string) => void;
 }
 
 export function ClearTasks({
@@ -199,6 +202,7 @@ export function ClearTasks({
   todos,
   setTodosAndSave,
   filter,
+  setFilter,
 }: ClearTasksProps) {
   const completedTodosLength = todos.filter((todo) =>
     filter === "All" || filter === "Active" ? !todo.isCompleted : ""
@@ -216,56 +220,61 @@ export function ClearTasks({
   };
 
   return (
-    <li className="w-full h-[3.25rem] flex items-center justify-between text-complements">
+    <div className="w-full h-[3.25rem] flex items-center justify-between text-complements rounded-b-md bg-main-bg">
       <h2 className="pl-6">{completedTodosLength} items left</h2>
+      <OrderList
+        className="flex gap-5 justify-center text-complements font-bold py-3 rounded-md max-sm:hidden"
+        filter={filter}
+        setFilter={setFilter}
+      />
       <button
         className="h-full pr-6 hover:text-hover-bg"
         onClick={handleClearComplete}
       >
         {text}
       </button>
-    </li>
+    </div>
   );
 }
 
 interface OrderListProps {
   filter: string;
   setFilter: (filter: string) => void;
+  className: string;
 }
 
-export function OrderList({ filter, setFilter }: OrderListProps) {
+export function OrderList({ filter, setFilter, className }: OrderListProps) {
   return (
-    <ul className="flex justify-center gap-5 bg-main-bg text-complements font-bold py-3 rounded-md">
-      <li>
-        <button
-          className={`hover:text-hover-bg ${
-            filter === "All" ? "text-bright-blue" : ""
-          }`}
-          onClick={() => setFilter("All")}
-        >
-          All
-        </button>
-      </li>
-      <li>
-        <button
-          className={`hover:text-hover-bg ${
-            filter === "Active" ? "text-bright-blue" : ""
-          }`}
-          onClick={() => setFilter("Active")}
-        >
-          Active
-        </button>
-      </li>
-      <li>
-        <button
-          className={`hover:text-hover-bg ${
-            filter === "Completed" ? "text-bright-blue" : ""
-          }`}
-          onClick={() => setFilter("Completed")}
-        >
-          Completed
-        </button>
-      </li>
-    </ul>
+    <div className={className}>
+      <button
+        className={`hover:text-hover-bg ${
+          filter === "All" ? "text-bright-blue" : ""
+        }`}
+        onClick={() => setFilter("All")}
+      >
+        All
+      </button>
+
+      <button
+        className={`hover:text-hover-bg ${
+          filter === "Active" ? "text-bright-blue" : ""
+        }`}
+        onClick={() => setFilter("Active")}
+      >
+        Active
+      </button>
+
+      <button
+        className={`hover:text-hover-bg ${
+          filter === "Completed" ? "text-bright-blue" : ""
+        }`}
+        onClick={() => setFilter("Completed")}
+      >
+        Completed
+      </button>
+    </div>
   );
+}
+{
+  /* <OrderList filter={filter} setFilter={setFilter} /> */
 }
