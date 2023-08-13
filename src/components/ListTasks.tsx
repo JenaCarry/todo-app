@@ -106,10 +106,16 @@ interface TasksProps {
 }
 
 export function Task({ todo, todos, setTodosAndSave }: TasksProps) {
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({
-      id: todo.id,
-    });
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({
+    id: todo.id,
+  });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -126,7 +132,6 @@ export function Task({ todo, todos, setTodosAndSave }: TasksProps) {
   };
 
   const handleComplete = (id: string) => {
-    console.log("click");
     const newTodos = [...todos];
     newTodos.map((todo) =>
       todo.id === id ? (todo.isCompleted = !todo.isCompleted) : todo
@@ -138,7 +143,7 @@ export function Task({ todo, todos, setTodosAndSave }: TasksProps) {
     <li
       className={`w-full h-[3.25rem] grid grid-cols-[4rem_1fr_4rem] border-b border-border-bg ${
         todo.isCompleted ? "line-through" : ""
-      }`}
+      } ${isDragging ? "bg-dragging rounded-lg" : ""}`}
       style={style}
       ref={setNodeRef}
       {...attributes}

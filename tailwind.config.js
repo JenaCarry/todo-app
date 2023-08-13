@@ -16,6 +16,7 @@ module.exports = {
         "border-bg": "var(--border-bg)",
         complements: "var(--complements)",
         "hover-bg": "var(--hover-bg)",
+        dragging: "var(--dragging)",
       },
       backgroundImage: {
         gradient:

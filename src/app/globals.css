@@ -16,6 +16,7 @@
   --border-bg: hsl(233, 11%, 84%);
   --complements: hsl(236, 9%, 61%);
   --hover-bg: hsl(235, 19%, 35%);
+  --dragging: rgba(0, 0, 0, 0.5);
 }
 
 .dark {
@@ -26,6 +27,7 @@
   --border-bg: hsl(237, 14%, 26%);
   --complements: hsl(233, 14%, 35%);
   --hover-bg: hsl(236, 33%, 92%);
+  --dragging: rgba(255, 255, 255, 0.5);
 }
 
 input:-webkit-autofill {
