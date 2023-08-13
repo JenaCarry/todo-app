@@ -113,6 +113,7 @@ export function Task({ todo, todos, setTodosAndSave }: TasksProps) {
     transform,
     transition,
     isDragging,
+    isOver,
   } = useSortable({
     id: todo.id,
   });
@@ -143,7 +144,9 @@ export function Task({ todo, todos, setTodosAndSave }: TasksProps) {
     <li
       className={`w-full h-[3.25rem] grid grid-cols-[4rem_1fr_4rem] border-b border-border-bg ${
         todo.isCompleted ? "line-through" : ""
-      } ${isDragging ? "bg-dragging rounded-lg" : ""}`}
+      } ${isDragging ? "bg-dragging rounded-lg" : ""} ${
+        isOver ? "border-none" : ""
+      }`}
       style={style}
       ref={setNodeRef}
       {...attributes}

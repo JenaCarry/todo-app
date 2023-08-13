@@ -6,6 +6,10 @@
   body {
     @apply min-h-screen max-[425px]:text-base text-lg text-text bg-body-bg bg-header-bg bg-no-repeat bg-top bg-[length:100%12.5rem] px-[1.625rem];
   }
+
+  button {
+    @apply transition-all duration-200 ease-in-out;
+  }
 }
 
 :root {
