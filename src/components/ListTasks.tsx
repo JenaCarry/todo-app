@@ -2,7 +2,14 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { FaCheck } from "react-icons/fa";
 import { IoClose } from "react-icons/io5";
-import { DndContext, closestCenter } from "@dnd-kit/core";
+import {
+  DndContext,
+  closestCenter,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import {
   SortableContext,
   verticalListSortingStrategy,
@@ -25,6 +32,21 @@ interface ListTasksProps {
 export function ListTasks({ todos, setTodosAndSave }: ListTasksProps) {
   const [filter, setFilter] = useState("All");
 
+  const mouseSensor = useSensor(MouseSensor, {
+    activationConstraint: {
+      distance: 3,
+    },
+  });
+
+  const touchSensor = useSensor(TouchSensor, {
+    activationConstraint: {
+      delay: 250,
+      tolerance: 5,
+    },
+  });
+
+  const sensors = useSensors(mouseSensor, touchSensor);
+
   function handleDragEnd(event: any) {
     const { active, over } = event;
 
@@ -38,6 +60,7 @@ export function ListTasks({ todos, setTodosAndSave }: ListTasksProps) {
     <>
       <ul className="bg-main-bg rounded-md overflow-hidden">
         <DndContext
+          sensors={sensors}
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}
         >
