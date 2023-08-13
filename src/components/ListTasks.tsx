@@ -40,7 +40,7 @@ export function ListTasks({ todos, setTodosAndSave }: ListTasksProps) {
 
   const touchSensor = useSensor(TouchSensor, {
     activationConstraint: {
-      delay: 100,
+      delay: 150,
       tolerance: 5,
     },
   });
