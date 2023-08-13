@@ -21,7 +21,8 @@ module.exports = {
       backgroundImage: {
         gradient:
           "linear-gradient(125deg, hsl(192, 100%, 67%),hsl(280, 87%, 65%))",
-        "header-bg": "var(--header-bg)",
+        "mobile-bg": "var(--mobile-bg)",
+        "desktop-bg": "var(--desktop-bg)",
       },
     },
   },
