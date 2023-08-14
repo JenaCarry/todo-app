@@ -22,7 +22,7 @@ export function Header() {
   }, [isLightTheme]);
 
   return (
-    <header className="w-full max-w-xl text-white text-2xl flex items-center justify-between py-11 mx-auto">
+    <header className="w-full max-w-[540px] text-white text-2xl sm:text-3xl flex items-center justify-between py-11 mx-auto">
       <h1 className="font-bold uppercase tracking-[0.5rem]">Todo</h1>
       <button onClick={() => seIsLightTheme((current) => !current)}>
         {isLightTheme ? <IoSunny className="text-3xl" /> : <FaMoon />}

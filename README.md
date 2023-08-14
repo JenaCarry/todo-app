@@ -13,11 +13,11 @@
   <br>
 
   <div align="center">
-    <a href="">View Demo</a>
+    <a href="https://todo-app-jenacarry.vercel.app/">View Demo</a>
     -
-    <a href="">Report Bug</a>
+    <a href="https://github.com/JenaCarry/todo-app/issues">Report Bug</a>
     -
-    <a href="">Request Feature</a>
+    <a href="https://github.com/JenaCarry/todo-app/pulls">Request Feature</a>
   </div>
 
 </div>
@@ -35,7 +35,7 @@ This is a solution to the [Todo app challenge on Frontend Mentor](https://www.fr
 <h2>Links</h2>
 
 - Solution URL: [Todo app | Frontend Mentor]()
-- Live Site URL: []()
+- Live Site URL: [https://todo-app-jenacarry.vercel.app/](https://todo-app-jenacarry.vercel.app/)
 
 <br>
 
@@ -81,12 +81,16 @@ Users should be able to:
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
 - [Tailwind CSS](https://tailwindcss.com/) - For styles
+- - [React-Hot-Toast](https://react-hot-toast.com/) - For Status
+- [Dnd-Kit](https://dndkit.com/) - Drag and Drop
 
 ## Useful resources
 
 - [Tailwind CSS](https://tailwindcss.com/)
 - [React](https://reactjs.org/)
 - [Next.js](https://nextjs.org/)
+- [React-Hot-Toast](https://react-hot-toast.com/)
+- [Dnd-Kit](https://dndkit.com/)
 
 ## Author
 

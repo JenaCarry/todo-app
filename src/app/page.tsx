@@ -31,7 +31,7 @@ export default function Home() {
       <Toaster />
       <Header />
 
-      <main className="w-full max-w-2xl flex flex-col mx-auto">
+      <main className="w-full max-w-[540px] flex flex-col mx-auto">
         <CreateTodo setTodos={setTodos} />
         <ListTasks todos={todos} setTodosAndSave={setTodosAndSave} />
       </main>
