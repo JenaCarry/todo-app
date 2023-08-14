@@ -57,8 +57,9 @@ export function ListTasks({ todos, setTodosAndSave }: ListTasksProps) {
   }
 
   return (
-    <div className="overflow-hidden">
-      <ul className="bg-main-bg rounded-t-md mt-4">
+    <section className="bg-main-bg rounded-md overflow-hidden shadow-xl">
+      <h2 className="sr-only">Todo list</h2>
+      <ul>
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
@@ -97,7 +98,7 @@ export function ListTasks({ todos, setTodosAndSave }: ListTasksProps) {
         filter={filter}
         setFilter={setFilter}
       />
-    </div>
+    </section>
   );
 }
 
@@ -144,7 +145,7 @@ export function Task({ todo, todos, setTodosAndSave }: TasksProps) {
 
   return (
     <li
-      className={`w-full h-[3.25rem] grid grid-cols-[4rem_1fr_4rem] border-b border-border-bg ${
+      className={`w-full h-[3.25rem] sm:h-[3.875rem] grid grid-cols-[4rem_1fr_4rem] border-b border-border-bg ${
         todo.isCompleted ? "line-through" : ""
       } ${isDragging ? "bg-dragging rounded-lg" : ""} ${
         isOver ? "border-none" : ""
@@ -220,7 +221,7 @@ export function ClearTasks({
   };
 
   return (
-    <div className="w-full h-[3.25rem] flex items-center justify-between text-complements rounded-b-md bg-main-bg text-sm">
+    <div className="w-full h-[3.25rem] flex items-center justify-between text-complements bg-main-bg text-base">
       <h2 className="pl-5">{completedTodosLength} items left</h2>
       <OrderList
         className="flex gap-5 justify-center text-complements font-bold py-3 rounded-md max-sm:hidden"
@@ -274,7 +275,4 @@ export function OrderList({ filter, setFilter, className }: OrderListProps) {
       </button>
     </div>
   );
-}
-{
-  /* <OrderList filter={filter} setFilter={setFilter} /> */
 }

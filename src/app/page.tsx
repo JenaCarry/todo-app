@@ -31,7 +31,8 @@ export default function Home() {
       <Toaster />
       <Header />
 
-      <main className="w-full max-w-[540px] flex flex-col mx-auto">
+      <main className="w-full max-w-[540px] flex flex-col mx-auto gap-4 sm:gap-6">
+        <h2 className="sr-only">Todo App</h2>
         <CreateTodo setTodos={setTodos} />
         <ListTasks todos={todos} setTodosAndSave={setTodosAndSave} />
       </main>

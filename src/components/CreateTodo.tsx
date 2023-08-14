@@ -46,22 +46,25 @@ export function CreateTodo({ setTodos }: CreateTodoProps) {
   }
 
   return (
-    <form
-      className="w-full grid grid-cols-[4rem_1fr] bg-main-bg overflow-hidden rounded-md"
-      onSubmit={handleSubmit}
-    >
-      <button className="flex items-center justify-center">
-        <div className="w-6 h-6 border border-border-bg rounded-full"></div>
-      </button>
-      <input
-        type="text"
-        name="text"
-        id="text"
-        value={todo.text}
-        placeholder="Create a new todo..."
-        className="outline-none py-2.5 pr-3 bg-main-bg text-text placeholder:text-complements"
-        onChange={handleOnChange}
-      />
-    </form>
+    <section className="shadow-xl">
+      <h2 className="sr-only">Create todo</h2>
+      <form
+        className="w-full grid grid-cols-[4rem_1fr] bg-main-bg overflow-hidden rounded-md"
+        onSubmit={handleSubmit}
+      >
+        <button className="flex items-center justify-center">
+          <div className="w-6 h-6 border border-border-bg rounded-full"></div>
+        </button>
+        <input
+          type="text"
+          name="text"
+          id="text"
+          value={todo.text}
+          placeholder="Create a new todo..."
+          className="outline-none py-3 sm:py-4 pr-3 bg-main-bg text-text placeholder:text-complements"
+          onChange={handleOnChange}
+        />
+      </form>
+    </section>
   );
 }
