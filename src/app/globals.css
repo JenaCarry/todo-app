@@ -4,11 +4,11 @@
 
 @layer base {
   body {
-    @apply min-h-screen max-[425px]:text-base text-lg text-text bg-body-bg max-[481px]:bg-mobile-bg bg-desktop-bg bg-no-repeat bg-top bg-[length:100%_12.5rem] sm:bg-[length:100%_18.75rem] px-[1.625rem];
+    @apply min-h-screen max-[425px]:text-base text-lg text-text bg-body-bg max-[481px]:bg-mobile-bg bg-desktop-bg bg-no-repeat bg-top bg-[length:100%_12.5rem] sm:bg-[length:100%_18.75rem] px-[1.625rem] transition-all duration-200 ease-in-out;
   }
 
   button {
-    @apply transition-all duration-200 ease-in-out;
+    @apply transition-all duration-75 ease-in-out;
   }
 }
 
@@ -46,11 +46,11 @@ input:-webkit-autofill {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-main-bg;
+  @apply bg-text;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-text border border-solid border-border-bg rounded-full;
+  @apply bg-main-bg border border-solid border-text rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
