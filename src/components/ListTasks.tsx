@@ -240,7 +240,7 @@ export function ClearTasks({
   };
 
   return (
-    <div className="w-full h-[3.25rem] flex items-center justify-between text-complements bg-main-bg text-base">
+    <div className="w-full flex items-center justify-between text-complements bg-main-bg text-base">
       <h2 className="pl-5">{completedTodosLength} items left</h2>
       <OrderList
         className="flex gap-5 justify-center text-complements font-bold py-3 rounded-md max-sm:hidden"
@@ -248,7 +248,7 @@ export function ClearTasks({
         setFilter={setFilter}
       />
       <button
-        className="h-full pr-5 hover:text-hover-bg"
+        className="pr-5 py-3.5 hover:text-hover-bg"
         onClick={handleClearComplete}
       >
         {text}
