@@ -162,7 +162,7 @@ export function Task({ todo, todos, setTodosAndSave }: TasksProps) {
 
   return (
     <li
-      className={`w-full h-[3.25rem] sm:h-[3.875rem] grid grid-cols-[4rem_1fr_4rem] border-b border-border-bg ${
+      className={`w-full grid grid-cols-[4rem_1fr_4rem] border-b border-border-bg ${
         todo.isCompleted ? "line-through" : ""
       } ${isDragging ? "bg-dragging rounded-lg" : ""} ${
         isOver ? "border-none" : ""
@@ -192,7 +192,9 @@ export function Task({ todo, todos, setTodosAndSave }: TasksProps) {
 
       <button
         onClick={() => handleComplete(todo.id)}
-        className={`text-left ${todo.isCompleted ? "opacity-30" : ""}`}
+        className={`text-left py-3.5 sm:py-4 ${
+          todo.isCompleted ? "opacity-30" : ""
+        }`}
       >
         {todo.text}
       </button>
