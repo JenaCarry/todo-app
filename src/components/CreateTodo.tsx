@@ -53,7 +53,7 @@ export function CreateTodo({ setTodos }: CreateTodoProps) {
         onSubmit={handleSubmit}
       >
         <button className="flex items-center justify-center">
-          <div className="w-6 h-6 border border-border-bg rounded-full"></div>
+          <span className="w-6 h-6 border border-border-bg rounded-full"></span>
         </button>
         <input
           type="text"
