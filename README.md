@@ -70,7 +70,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./public/screenshot.png)
+![](./public/screenshot.jpg)
 
 ## My process
 
@@ -81,7 +81,7 @@ Users should be able to:
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
 - [Tailwind CSS](https://tailwindcss.com/) - For styles
-- - [React-Hot-Toast](https://react-hot-toast.com/) - For Status
+- [React-Hot-Toast](https://react-hot-toast.com/) - For Status
 - [Dnd-Kit](https://dndkit.com/) - Drag and Drop
 
 ## Useful resources

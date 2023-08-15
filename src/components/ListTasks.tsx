@@ -70,7 +70,7 @@ export function ListTasks({ todos, setTodosAndSave }: ListTasksProps) {
               items={todos}
               strategy={verticalListSortingStrategy}
             >
-              {todos.length > 0 &&
+              {todos.length > 0 ? (
                 todos
                   .filter((todo) =>
                     filter === "All"
@@ -86,7 +86,19 @@ export function ListTasks({ todos, setTodosAndSave }: ListTasksProps) {
                       todos={todos}
                       setTodosAndSave={setTodosAndSave}
                     />
-                  ))}
+                  ))
+              ) : (
+                <div className="flex flex-col items-center justify-center py-4 border-b border-border-bg">
+                  <img
+                    src="addTodo.svg"
+                    alt="Add Todo"
+                    width="390"
+                    height="369"
+                    className="w-1/2"
+                  />
+                  <p>Add some todos...</p>
+                </div>
+              )}
             </SortableContext>
           </DndContext>
         </ul>
