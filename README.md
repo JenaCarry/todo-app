@@ -5,7 +5,7 @@
   <h2>Todo app</h2>
 
   <h3>
-    <a href="">
+    <a href="https://www.frontendmentor.io/solutions/todo-app-Xd2XKWu4p2">
       <strong>Frontend Mentor</strong>
     </a>
   </h3>
@@ -34,7 +34,7 @@ This is a solution to the [Todo app challenge on Frontend Mentor](https://www.fr
 
 <h2>Links</h2>
 
-- Solution URL: [Todo app | Frontend Mentor]()
+- Solution URL: [Todo app | Frontend Mentor](https://www.frontendmentor.io/solutions/todo-app-Xd2XKWu4p2)
 - Live Site URL: [https://todo-app-jenacarry.vercel.app/](https://todo-app-jenacarry.vercel.app/)
 
 <br>
