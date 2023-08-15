@@ -60,7 +60,7 @@ export function ListTasks({ todos, setTodosAndSave }: ListTasksProps) {
     <>
       <section className="bg-main-bg rounded-md overflow-hidden shadow-xl">
         <h2 className="sr-only">Todo list</h2>
-        <ul>
+        <div>
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
@@ -101,7 +101,7 @@ export function ListTasks({ todos, setTodosAndSave }: ListTasksProps) {
               )}
             </SortableContext>
           </DndContext>
-        </ul>
+        </div>
         <ClearTasks
           text="Clear Completed"
           todos={todos}
@@ -161,7 +161,7 @@ export function Task({ todo, todos, setTodosAndSave }: TasksProps) {
   };
 
   return (
-    <li
+    <div
       className={`w-full grid grid-cols-[4rem_1fr_4rem] border-b border-border-bg ${
         todo.isCompleted ? "line-through" : ""
       } ${isDragging ? "bg-dragging rounded-lg" : ""} ${
@@ -177,16 +177,16 @@ export function Task({ todo, todos, setTodosAndSave }: TasksProps) {
           className="flex items-center justify-center"
           onClick={() => handleComplete(todo.id)}
         >
-          <div className="w-6 h-6 bg-gradient rounded-full flex items-center justify-center">
+          <span className="w-6 h-6 bg-gradient rounded-full flex items-center justify-center">
             <FaCheck className="text-white text-[0.625rem]" />
-          </div>
+          </span>
         </button>
       ) : (
         <button
           className="flex items-center justify-center"
           onClick={() => handleComplete(todo.id)}
         >
-          <div className="w-6 h-6 border border-border-bg rounded-full"></div>
+          <span className="w-6 h-6 border border-border-bg rounded-full"></span>
         </button>
       )}
 
@@ -205,7 +205,7 @@ export function Task({ todo, todos, setTodosAndSave }: TasksProps) {
       >
         <IoClose className="text-3xl text-complements" />
       </button>
-    </li>
+    </div>
   );
 }
 
