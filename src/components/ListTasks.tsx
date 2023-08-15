@@ -57,48 +57,53 @@ export function ListTasks({ todos, setTodosAndSave }: ListTasksProps) {
   }
 
   return (
-    <section className="bg-main-bg rounded-md overflow-hidden shadow-xl">
-      <h2 className="sr-only">Todo list</h2>
-      <ul>
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}
-        >
-          <SortableContext items={todos} strategy={verticalListSortingStrategy}>
-            {todos.length > 0 &&
-              todos
-                .filter((todo) =>
-                  filter === "All"
-                    ? true
-                    : filter === "Completed"
-                    ? todo.isCompleted
-                    : !todo.isCompleted
-                )
-                .map((todo) => (
-                  <Task
-                    key={todo.id}
-                    todo={todo}
-                    todos={todos}
-                    setTodosAndSave={setTodosAndSave}
-                  />
-                ))}
-          </SortableContext>
-        </DndContext>
-      </ul>
-      <ClearTasks
-        text="Clear Completed"
-        todos={todos}
-        setTodosAndSave={setTodosAndSave}
-        filter={filter}
-        setFilter={setFilter}
-      />
+    <>
+      <section className="bg-main-bg rounded-md overflow-hidden shadow-xl">
+        <h2 className="sr-only">Todo list</h2>
+        <ul>
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+          >
+            <SortableContext
+              items={todos}
+              strategy={verticalListSortingStrategy}
+            >
+              {todos.length > 0 &&
+                todos
+                  .filter((todo) =>
+                    filter === "All"
+                      ? true
+                      : filter === "Completed"
+                      ? todo.isCompleted
+                      : !todo.isCompleted
+                  )
+                  .map((todo) => (
+                    <Task
+                      key={todo.id}
+                      todo={todo}
+                      todos={todos}
+                      setTodosAndSave={setTodosAndSave}
+                    />
+                  ))}
+            </SortableContext>
+          </DndContext>
+        </ul>
+        <ClearTasks
+          text="Clear Completed"
+          todos={todos}
+          setTodosAndSave={setTodosAndSave}
+          filter={filter}
+          setFilter={setFilter}
+        />
+      </section>
       <OrderList
-        className="flex gap-5 justify-center bg-main-bg text-complements font-bold py-3 rounded-md mt-4 min-[640px]:hidden"
+        className="flex gap-5 justify-center bg-main-bg text-complements font-bold py-3 rounded-md min-[640px]:hidden"
         filter={filter}
         setFilter={setFilter}
       />
-    </section>
+    </>
   );
 }
 
